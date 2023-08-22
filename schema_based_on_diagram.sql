@@ -30,3 +30,21 @@ CREATE TABLE visits (
   medical_history_id INTEGER REFERENCES medical_histories(id),
   treatment_id INTEGER REFERENCES treatments(id)
 );
+
+--invoices table
+CREATE TABLE invoices (
+  id BIGSERIAL PRIMARY KEY,
+  generated_at TIMESTAMP,
+  payed_at TIMESTAMP,
+  medical_history_id INTEGER REFERENCES medical_histories(id)
+);
+
+--invoice_items table
+CREATE TABLE invoice_items (
+  id BIGSERIAL PRIMARY KEY,
+  unit_price DECIMAL(10,2),
+  quantity INTEGER,
+  total_price DECIMAL(10,2),
+  invoice_id INTEGER REFERENCES invoices(id),
+  treatment_id INTEGER REFERENCES treatments(id)
+);
